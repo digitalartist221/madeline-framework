@@ -12,9 +12,15 @@
 
 Madeline est une infrastructure logicielle PHP moderne conçue pour la robustesse et la scalabilité. Elle élimine la surcharge cognitive grâce à un typage strict et une sémantique Wolof intégrée.
 
+### Quick Install
+
+```bash
+composer require digitalartist/madeline-framework
+```
+
 ---
 
-## 🏛️ Architecture Core
+## 🏛️ Philosophie "Rek"
 - **Cycle Synchrone** : Exécution ultra-rapide sans surcharge de services inutiles.
 - **Turbo SPA Engine v6.5** : Navigation asynchrone native avec injection de styles.
 - **Shield Security** : Protection multicouche (CSP, HSTS, XSS, CSRF).
