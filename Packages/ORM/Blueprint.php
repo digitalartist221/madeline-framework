@@ -65,13 +65,14 @@ class Blueprint {
     }
 
     private function mapType($phpType) {
+        $phpType = ltrim($phpType, '?'); // Gérer les types nullables (ex: ?int)
         switch ($phpType) {
-            case 'int': return 'INT';
-            case 'float': return 'FLOAT';
-            case 'bool': return 'TINYINT(1)';
+            case 'int': return 'INT NOT NULL DEFAULT 0';
+            case 'float': return 'FLOAT NOT NULL DEFAULT 0';
+            case 'bool': return 'TINYINT(1) NOT NULL DEFAULT 0';
             case 'DateTime': return 'DATETIME';
             case 'array': return 'JSON';
-            default: return 'VARCHAR(255)';
+            default: return 'VARCHAR(255) NULL';
         }
     }
 }

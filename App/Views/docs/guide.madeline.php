@@ -10,6 +10,7 @@
     <a class="sidebar-link" href="#security">Sécurité & Shield</a>
     <a class="sidebar-link" href="#orm">MadelineORM (Synchro SQL)</a>
     <a class="sidebar-link" href="#views">Moteur MadelineView</a>
+    <a class="sidebar-link" href="#assets">Gestion des Assets</a>
     <a class="sidebar-link" href="#components">Architecture Composants</a>
     <a class="sidebar-link" href="#mail">Mails & Templates</a>
     <a class="sidebar-link" href="#storage">Storage & Uploads</a>
@@ -146,9 +147,24 @@ $dbHost = Config::get('database.host', 'localhost');</code></pre>
                         <tr><td class="py-4"><code>@indi(...)</code></td><td class="py-4">Héritage de layout (Extends).</td></tr>
                         <tr><td class="py-4"><code>{{ $var }}</code></td><td class="py-4">Affichage échappé (Anti-XSS).</td></tr>
                         <tr><td class="py-4"><code>{!! $var !!}</code></td><td class="py-4">Affichage brut (HTML non-échappé).</td></tr>
+                        <tr><td class="py-4"><code>@json($var)</code></td><td class="py-4">Encodage JSON automatique (Idéal pour JavaScript natif).</td></tr>
+                        <tr><td class="py-4"><code>@csrf</code></td><td class="py-4">Génération d'un token CSRF caché pour sécuriser les formulaires POST.</td></tr>
                     </tbody>
                 </table>
             </div>
+
+            <h3 id="assets" class="mt-20">Gestion des Assets</h3>
+            <p>Madeline centralise la gestion des fichiers statiques (CSS, JS, Images) via une fonction globale de helper.</p>
+            
+            <h4>La fonction <code>asset($path)</code></h4>
+            <p>Cette fonction génère une URL absolue vers vos fichiers situés dans le dossier <code>public/</code>. Elle ajoute automatiquement un paramètre de version (cache-busting) basé sur la date de modification du fichier.</p>
+<pre><code>&lt;!-- Dans votre layout ou vue --&gt;
+&lt;link rel="stylesheet" href="{{ asset('css/madeline.css') }}"&gt;
+&lt;script src="{{ asset('js/madeline.js') }}"&gt;&lt;/script&gt;
+&lt;img src="{{ asset('img/logo.png') }}" alt="Logo"&gt;</code></pre>
+
+            <h4>Stylesheet Global</h4>
+            <p>Le framework inclut un fichier <code>public/css/madeline.css</code> pour vos styles globaux et variables CSS personnalisées.</p>
 
             <h3 id="components" class="mt-20">Architecture Composants</h3>
             <p>Déclarez des composants réutilisables avec une syntaxe proche du HTML moderne.</p>

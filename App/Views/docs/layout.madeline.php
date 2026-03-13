@@ -104,7 +104,7 @@
                     <div class="relative z-10">
                         <p class="text-[9px] font-black text-brand-500 uppercase tracking-[0.2em] mb-3">Statut du Système</p>
                         <p class="text-[13px] text-gray-500 dark:text-white/60 leading-relaxed mb-6 font-light">Madeline <strong>v1.0.0 Stable</strong> est optimisé pour les déploiements industriels.</p>
-                        <a href="https://github.com" class="text-[10px] font-bold text-gray-900 dark:text-white hover:text-brand-400 transition-all uppercase tracking-widest flex items-center gap-2 group/btn">
+                        <a href="{{ url('https://github.com') }}" class="text-[10px] font-bold text-gray-900 dark:text-white hover:text-brand-400 transition-all uppercase tracking-widest flex items-center gap-2 group/btn">
                             GitHub Repository
                             <svg class="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </a>
@@ -121,8 +121,8 @@
             <div class="mt-32 pt-12 border-t border-gray-100 dark:border-white/[0.05] flex justify-between items-center text-sm">
                 <div class="text-gray-400 dark:text-white/20">© Madeline Framework</div>
                 <div class="flex gap-6 uppercase tracking-widest text-[10px] font-bold">
-                    <a href="/" class="hover:text-brand-500 dark:hover:text-white transition-colors">Accueil</a>
-                    <a href="/api/docs/ui" class="hover:text-brand-500 dark:hover:text-white transition-colors">API Console</a>
+                    <a href="{{ url('/') }}" class="hover:text-brand-500 dark:hover:text-white transition-colors">Accueil</a>
+                    <a href="{{ url('api/docs/ui') }}" class="hover:text-brand-500 dark:hover:text-white transition-colors">API Console</a>
                 </div>
             </div>
         </main>

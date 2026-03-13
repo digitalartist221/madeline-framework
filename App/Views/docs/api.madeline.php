@@ -116,7 +116,7 @@
 @jeexdef
 
 @def('toc')
-    <a href="/docs" class="sidebar-link group">
+    <a href="{{ url('docs') }}" class="sidebar-link group">
         <svg class="w-4 h-4 mr-3 opacity-40 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         Retour au Guide
     </a>

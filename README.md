@@ -70,5 +70,14 @@ Madeline intègre par défaut le middleware `SecurityHeadersMiddleware` :
 - **Anti-Clickjacking** (X-Frame-Options).
 - **Jetons CSRF** via `@csrf`.
 
+## 💻 MadelineView (Turbo Template Engine)
+Madeline propose un moteur de rendu ultra-véloce avec des directives personnalisées pour un maximum d'expressivité et de sécurité :
+- `{{ $var }}` : Affiche $var en échappant les attaques XSS.
+- `{!! $var !!}` : Affiche $var sans échappement (HTML Brut).
+- `@json($array)` : Convertit un tableau ou objet PHP en JSON (Idéal pour l'injection dans `<script>`).
+- `@csrf` : Génère automatiquement un champ `<input type="hidden">` avec le jeton de sécurité pour contrer les failles CSRF.
+- `@baat(...)` / `@mboloo(...)` : Boucles natives ultrarapides en Wolof (`foreach`).
+- `@ndax(...)` / `@xaaj` : Conditions natives (`if` / `else`).
+
 ---
 ### *Madeline - L'excellence logicielle signée Digital Artist Studio.*

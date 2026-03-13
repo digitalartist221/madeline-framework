@@ -1,0 +1,63 @@
+/* 
+ * Madeline Framework — Global Stylesheet
+ * "L'Art du PHP Moderne"
+ */
+
+:root {
+    --brand-primary: #8b5cf6;
+    --brand-secondary: #7c3aed;
+    --brand-bg-dark: #030305;
+    --brand-bg-light: #ffffff;
+    --glass-blur: 20px;
+}
+
+/* Base resets & improvements */
+html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Premium Typography Utilities */
+.font-serif { font-family: 'Playfair Display', serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Custom Madeline Components */
+.madeline-gradient-text {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.madeline-glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark .madeline-glass {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Animations Core */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-float-slow {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Responsive Helpers */
+@media (max-width: 768px) {
+    .glass-header {
+        height: 70px;
+    }
+}
