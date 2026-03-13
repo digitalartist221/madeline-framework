@@ -87,4 +87,22 @@ Router::post('/forgot-password', ['\App\Controllers\AuthController', 'forgotPass
 
 // Route Sécurisée par l'AuthMiddleware
 Router::get('/dashboard', ['\App\Controllers\DashboardController', 'index'], ['\App\Middlewares\AuthMiddleware']);
+
+// --- DOCUMENTATION & API ---
+Router::get('/docs', function() {
+    return MadelineView::render('docs/guide');
+});
+Router::get('/api/docs/ui', function() {
+    return MadelineView::render('docs/api');
+});
+Router::get('/api/docs', function() {
+    // Tentative de récupération dynamique de la spec si le controller existe
+    if (class_exists('\App\Controllers\ApiController')) {
+        return (new \App\Controllers\ApiController())->docs();
+    }
+    // Fallback ou erreur si non implémenté
+    header('Content-Type: application/json');
+    echo json_encode(['openapi' => '3.0.0', 'info' => ['title' => 'Madeline API', 'version' => '1.0.0'], 'paths' => []]);
+    exit;
+});
 // ========================================= //

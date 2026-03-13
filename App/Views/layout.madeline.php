@@ -334,7 +334,7 @@
                 <p>&copy; {{ date('Y') }} — Un chef-d'œuvre de <span class="text-gray-900 dark:text-white/40 font-serif italic lowercase tracking-normal text-sm">Digital Artist Studio</span></p>
                 <div class="flex gap-10 items-center">
                     <span class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-green-500"></span> Stable v1.0.0</span>
-                    <span class="hover:text-brand-500 dark:hover:text-white transition-colors cursor-pointer">Licence MIT</span>
+                    <a href="https://github.com/digitalartist221/madeline-framework" target="_blank" class="hover:text-brand-500 dark:hover:text-white transition-colors cursor-pointer">Licence MIT</a>
                 </div>
             </div>
         </div>
