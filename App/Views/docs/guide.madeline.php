@@ -46,13 +46,14 @@
             
             <div class="p-8 rounded-3xl bg-brand-500/5 border border-brand-500/10 mb-12">
                 <h4 class="text-brand-500 font-black uppercase tracking-widest text-xs mb-4">Installation Rapide</h4>
-                <p class="text-sm mb-4">Initialisez votre projet Madeline en une seule commande :</p>
+                <p class="text-sm mb-4">Initialisez votre projet Madeline en une seule commande. Si vous installez plusieurs fois, spécifiez un nom de dossier différent pour éviter les conflits :</p>
                 <div class="bg-black/90 rounded-2xl p-6 font-mono text-sm text-brand-400 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-3 opacity-20">
                         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
                     </div>
-                    composer create-project digitalartist/madeline-framework mon-projet
+                    composer create-project digitalartist/madeline-framework mon-projet-madeline
                 </div>
+                <p class="text-[10px] opacity-40 mt-4 italic">Note : Si le dossier par défaut 'madeline-framework' existe déjà, Composer refusera l'installation. Utilisez alors un nom personnalisé comme 'mon-projet-madeline'.</p>
             </div>
 
             <p>Le noyau de Madeline (Rek) repose sur une architecture de type micro-kernel, privilégiant l'absence de mémoire statique et une exécution synchrone rapide.</p>

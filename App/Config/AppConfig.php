@@ -7,52 +7,54 @@ namespace App\Config;
  * Toutes les variables d'environnement, accès base de données,
  * et réglages globaux se trouvent ici.
  */
-class AppConfig {
-    
-    public static function get() {
+class AppConfig
+{
+
+    public static function get()
+    {
         return [
             /*
-            |--------------------------------------------------------------------------
-            | Nom de l'application
-            |--------------------------------------------------------------------------
-            */
+     |--------------------------------------------------------------------------
+     | Nom de l'application
+     |--------------------------------------------------------------------------
+     */
             'name' => 'Madeline',
-            'description' => 'Gestionnaire administratif',
+            'description' => 'Framework PHP Ultra-Moderne, Sémantique et Performant avec Moteur SPA Intégré.',
 
             /*
-            |--------------------------------------------------------------------------
-            | Environnement et Debug
-            |--------------------------------------------------------------------------
-            | Valeurs: 'local', 'production'
-            */
+     |--------------------------------------------------------------------------
+     | Environnement et Debug
+     |--------------------------------------------------------------------------
+     | Valeurs: 'local', 'production'
+     */
             'env' => 'local',
             'debug' => true,
 
             /*
-            |--------------------------------------------------------------------------
-            | URL de base
-            |--------------------------------------------------------------------------
-            */
+     |--------------------------------------------------------------------------
+     | URL de base
+     |--------------------------------------------------------------------------
+     */
             'url' => 'http://localhost:8000',
 
             /*
-            |--------------------------------------------------------------------------
-            | Gestion du Cache des Vues (Automatique Intelligente)
-            |--------------------------------------------------------------------------
-            | view_cache_lifetime: Durée en secondes avant vérification/recompilation
-            | - En mode 'local', le cache est toujours invalidé (recompilé en direct)
-            | - Si = 0, il ne se recompile jamais sauf si le fichier source a changé
-            | Exemple: 3600 = vérifie/recompile le cache source au bout d'une heure max
-            */
+     |--------------------------------------------------------------------------
+     | Gestion du Cache des Vues (Automatique Intelligente)
+     |--------------------------------------------------------------------------
+     | view_cache_lifetime: Durée en secondes avant vérification/recompilation
+     | - En mode 'local', le cache est toujours invalidé (recompilé en direct)
+     | - Si = 0, il ne se recompile jamais sauf si le fichier source a changé
+     | Exemple: 3600 = vérifie/recompile le cache source au bout d'une heure max
+     */
             'view_cache_lifetime' => 3600,
 
             /*
-            |--------------------------------------------------------------------------
-            | Configuration de la Base de Données
-            |--------------------------------------------------------------------------
-            | Laissez db_name vide pour déclencher le SetupController interactif.
-            | Remplacement automatique lors du setup si name est vide.
-            */
+     |--------------------------------------------------------------------------
+     | Configuration de la Base de Données
+     |--------------------------------------------------------------------------
+     | Laissez db_name vide pour déclencher le SetupController interactif.
+     | Remplacement automatique lors du setup si name est vide.
+     */
             'database' => [
                 'host' => 'localhost',
                 'name' => 'madeline_db',
@@ -62,29 +64,29 @@ class AppConfig {
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Configuration Mail (SMTP)
-            |--------------------------------------------------------------------------
-            */
+     |--------------------------------------------------------------------------
+     | Configuration Mail (SMTP)
+     |--------------------------------------------------------------------------
+     */
             'mail' => [
                 'from_email' => 'noreply@madeline.local',
                 'from_name' => 'Madeline',
-                'host' => 'sandbox.smtp.mailtrap.io',
-                'port' => '2525',
-                'user' => '9cd2e4844e1210',
-                'pass' => '1050693059b1c1',
+                'host' => '',
+                'port' => '',
+                'user' => '',
+                'pass' => '',
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Middlewares Globaux
-            |--------------------------------------------------------------------------
-            | Ces middlewares seront exécutés à CHAQUE requête.
-            |--------------------------------------------------------------------------
-            */
+     |--------------------------------------------------------------------------
+     | Middlewares Globaux
+     |--------------------------------------------------------------------------
+     | Ces middlewares seront exécutés à CHAQUE requête.
+     |--------------------------------------------------------------------------
+     */
             'middlewares' => [
-                \App\Middlewares\SecurityHeadersMiddleware::class,
-                \App\Middlewares\CsrfMiddleware::class,
+                \App\Middlewares\SecurityHeadersMiddleware::class ,
+                \App\Middlewares\CsrfMiddleware::class ,
             ]
         ];
     }

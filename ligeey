@@ -1517,7 +1517,27 @@ EOD;
 
     case 'doxal':
     case 'serve':
-        $port = $arg ?: 8000;
+        $port = (int)($arg ?: 8000);
+        
+        // Fonction pour vérifier si un port est libre
+        $isPortFree = function($p) {
+            $connection = @fsockopen('localhost', $p);
+            if (is_resource($connection)) {
+                fclose($connection);
+                return false;
+            }
+            return true;
+        };
+
+        $originalPort = $port;
+        while (!$isPortFree($port)) {
+            $port++;
+        }
+
+        if ($port !== $originalPort) {
+            echo "⚠️  Port $originalPort utilisé. Madeline s'est déplacée sur le port $port.\n";
+        }
+
         $host = "localhost:$port";
         echo "✓ Madeline doxal na sa serveur ci http://$host\n";
         echo "💡 Bu la neexé dagg ko ak Ctrl+C.\n";
