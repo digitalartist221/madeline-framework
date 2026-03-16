@@ -10,11 +10,16 @@ class Cache {
      */
     public static function clear() {
         $cacheDir = __DIR__ . '/../storage/cache/views';
-        if (is_dir($cacheDir)) {
-            $files = glob($cacheDir . '/*.php');
-            foreach ($files as $file) {
-                if (is_file($file)) unlink($file);
-            }
+        
+        // Création récursive si le dossier n'existe pas
+        if (!is_dir($cacheDir)) {
+            mkdir($cacheDir, 0777, true);
+            return;
+        }
+
+        $files = glob($cacheDir . '/*.php');
+        foreach ($files as $file) {
+            if (is_file($file)) unlink($file);
         }
     }
 
@@ -24,7 +29,14 @@ class Cache {
      * @param int $hours Intervalle en heures (défaut: 24h)
      */
     public static function autoClear($hours = 24) {
-        $marker = __DIR__ . '/../storage/cache/last_clear.txt';
+        $cacheDir = __DIR__ . '/../storage/cache';
+        $marker = $cacheDir . '/last_clear.txt';
+        
+        // Assurer que le dossier de base du cache existe
+        if (!is_dir($cacheDir)) {
+            mkdir($cacheDir, 0777, true);
+        }
+
         $now = time();
 
         if (!file_exists($marker)) {
