@@ -155,7 +155,7 @@ switch ($command) {
             'auth', 'docs', 'mail', 'errors', 'Components',
             'layout.madeline.php', 'dashboard.madeline.php', 'welcome.madeline.php',
             'api.madeline.php', 'guide.madeline.php', 'AppConfig.php',
-            'madeline.code-snippets', '.htaccess', 'favicon.png' // Protecting snippets and hosting configs
+            'madeline.code-snippets', '.htaccess', 'favicon.png', 'check.php' // Protecting snippets, hosting configs and diagnostics
         ];
 
         foreach ($dirsToClean as $dir) {
@@ -1465,6 +1465,8 @@ EOD;
         $rootHtaccessTemplate = <<<'EOD'
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    
+    # Rediriger tout vers le dossier public/ s'il n'y est pas déjà
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
@@ -1473,8 +1475,12 @@ EOD;
         $publicHtaccessTemplate = <<<'EOD'
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    
+    # Ne rien faire si c'est un fichier ou dossier réel
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Envoyer tout vers index.php
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 EOD;
