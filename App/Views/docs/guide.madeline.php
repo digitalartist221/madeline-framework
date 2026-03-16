@@ -51,7 +51,7 @@
                     <div class="absolute top-0 right-0 p-3 opacity-20">
                         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
                     </div>
-                    composer require digitalartist/madeline-framework
+                    composer create-project digitalartist/madeline-framework mon-projet
                 </div>
             </div>
 
@@ -66,8 +66,7 @@
                 <li><strong>Rendu</strong> : Envoi de la réponse au client.</li>
             </ol>
 
-            <h3>Configuration</h3>
-            <p>Madeline utilise l'objet <code>Core\Config</code> pour centraliser les paramètres. Les fichiers de configuration sont situés à la racine (<code>config.php</code>).</p>
+            <p>Madeline utilise l'objet <code>Core\Config</code> pour centraliser les paramètres. Les réglages sont situés dans <code>App/Config/AppConfig.php</code>.</p>
 <pre><code>use Core\Config;
 
 // Récupération sécurisée
@@ -277,8 +276,8 @@ return [
 ];
 
 // Utilisation
-\$name = \Core\Config::get('name');
-\$smtp = \Core\Config::get('mail.host');</code></pre>
+$name = \Core\Config::get('name');
+$smtp = \Core\Config::get('mail.host');</code></pre>
 
             <h3>Assistant d'Installation</h3>
             <p>Lors d'un premier déploiement, vous pouvez accéder à <code>/setup</code> pour configurer les accès essentiels via une interface graphique interactive.</p>
@@ -333,7 +332,7 @@ Mail::send(
 &lt;/div&gt;</code></pre>
 
             <h3>Configuration</h3>
-            <p>La configuration SMTP est gérée dans <code>config/app.php</code> sous la clé <code>mail</code>. En mode local sans serveur mail configuré, l'envoi est simulé dans les logs PHP.</p>
+            <p>La configuration SMTP est gérée dans <code>App/Config/AppConfig.php</code> sous la clé <code>mail</code>. En mode local sans serveur mail configuré, l'envoi est simulé dans les logs PHP.</p>
         </section>
 
         <!-- 9. STORAGE -->
