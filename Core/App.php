@@ -23,11 +23,18 @@ class App {
         }
 
         // Configuration de base ou DB
-        $isConfigured = $this->isConfigured();
+        $isConfigured = self::isConfigured();
         
+        // Gestion du bypass (Ignorer le setup)
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        if (isset($_GET['skip_setup'])) {
+            $_SESSION['m_skip_setup'] = true;
+        }
+        $isSkipped = $_SESSION['m_skip_setup'] ?? false;
+
         $isSetupUrl = (trim($url, '/') === 'setup');
 
-        if (!$isConfigured && !$isSetupUrl) {
+        if (!$isConfigured && !$isSetupUrl && !$isSkipped) {
             // Pas de config du tout -> Assistant d'installation
             header('Location: /setup');
             exit;
@@ -48,9 +55,10 @@ class App {
         }
     }
 
-    private function isConfigured() {
+    public static function isConfigured() {
         // Le framework est considéré comme configuré si l'un de ces fichiers existe
-        return file_exists(__DIR__ . '/../config/app.php') || 
+        return class_exists('\\App\\Config\\AppConfig') || 
+               file_exists(__DIR__ . '/../App/Config/AppConfig.php') ||
                file_exists(__DIR__ . '/../config.php');
     }
 }

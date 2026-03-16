@@ -16,7 +16,7 @@ class AppConfig {
             | Nom de l'application
             |--------------------------------------------------------------------------
             */
-            'name' => 'Maye',
+            'name' => 'Madeline',
             'description' => 'Gestionnaire administratif',
 
             /*
