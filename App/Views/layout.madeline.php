@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ @biir('pageTitle') ?? 'Madeline — Software de gestion industrielle' }}</title>
+    <title>@biir('pageTitle', 'Documentation Technique — Madeline')</title>
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
     <meta name="description" content="{{ \Core\Config::get('app.description', 'Infrastructure PHP 8.3 Industrielle') }}">
     

@@ -152,8 +152,8 @@ class MadelineView {
         $content = str_replace('@miingi fi', '<?php if(isset($_SESSION[\'user_id\'])): ?>', $content);
         $content = str_replace('@jeexmiingi', '<?php endif; ?>', $content);
 
-        // @biir('content') -> yield section content
-        $content = preg_replace('/@biir\([\'"](.+?)[\'"]\)/', '<?php echo \Packages\View\MadelineView::yieldContent(\'$1\'); ?>', $content);
+        // @biir('content', 'Default') -> yield section content with optional default
+        $content = preg_replace('/@biir\([\'"](.+?)[\'"](?:\s*,\s*[\'"](.*?)[\'"])?\)/', '<?php echo \Packages\View\MadelineView::yieldContent(\'$1\', \'$2\'); ?>', $content);
 
         // Gestion des Composants: <x-alert type="danger">Slot content</x-alert>
         $content = self::compileComponents($content);
@@ -252,7 +252,7 @@ class MadelineView {
         self::$componentProps[$name] .= ob_get_clean();
     }
 
-    public static function yieldContent($name) {
-        return self::$componentProps[$name] ?? '';
+    public static function yieldContent($name, $default = '') {
+        return self::$componentProps[$name] ?? $default;
     }
 }
