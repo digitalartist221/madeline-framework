@@ -155,7 +155,7 @@ switch ($command) {
             'auth', 'docs', 'mail', 'errors', 'Components',
             'layout.madeline.php', 'dashboard.madeline.php', 'welcome.madeline.php',
             'api.madeline.php', 'guide.madeline.php', 'AppConfig.php',
-            'madeline.code-snippets' // Protecting snippets
+            'madeline.code-snippets', '.htaccess', 'favicon.png' // Protecting snippets and hosting configs
         ];
 
         foreach ($dirsToClean as $dir) {
@@ -1462,6 +1462,23 @@ EOD;
 </html>
 EOD;
 
+        $rootHtaccessTemplate = <<<'EOD'
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+EOD;
+
+        $publicHtaccessTemplate = <<<'EOD'
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
+EOD;
+
         $appConfigTemplate = <<<'EOD'
 <?php
 namespace App\Config;
@@ -1504,6 +1521,11 @@ EOD;
         file_put_contents(__DIR__ . '/App/Views/docs/guide.madeline.php', $guideTemplate);
         file_put_contents(__DIR__ . '/App/Views/docs/api.madeline.php', $apiTemplate);
         file_put_contents(__DIR__ . '/App/Views/docs/layout.madeline.php', $docsLayoutTemplate);
+        
+        // Host Resilience
+        file_put_contents(__DIR__ . '/.htaccess', $rootHtaccessTemplate);
+        if (!is_dir(__DIR__ . '/public')) mkdir(__DIR__ . '/public', 0777, true);
+        file_put_contents(__DIR__ . '/public/.htaccess', $publicHtaccessTemplate);
         
         if (!file_exists(__DIR__ . '/App/Config/AppConfig.php')) {
             if (!is_dir(__DIR__ . '/App/Config')) mkdir(__DIR__ . '/App/Config', 0777, true);
