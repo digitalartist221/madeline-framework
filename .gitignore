@@ -3,5 +3,6 @@
 /config/app.php
 /storage/cache/
 /.gemini/
+/.agents/
 .env
 *.log

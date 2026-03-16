@@ -14,7 +14,6 @@ class AuthMiddleware {
             // Utilisateur non connecté : on coupe la route et on redirige
             header('Location: /login');
             exit;
-            return false;
         }
 
         return true; // Continue vers le contrôleur

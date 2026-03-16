@@ -16,7 +16,8 @@ class AppConfig {
             | Nom de l'application
             |--------------------------------------------------------------------------
             */
-            'name' => 'Madeline App',
+            'name' => 'Maye',
+            'description' => 'Gestionnaire administratif',
 
             /*
             |--------------------------------------------------------------------------
@@ -50,10 +51,11 @@ class AppConfig {
             | Configuration de la Base de Données
             |--------------------------------------------------------------------------
             | Laissez db_name vide pour déclencher le SetupController interactif.
+            | Remplacement automatique lors du setup si name est vide.
             */
             'database' => [
                 'host' => 'localhost',
-                'name' => 'madeline_db', // Remplaced by setup if empty
+                'name' => 'madeline_db',
                 'user' => 'root',
                 'pass' => '',
                 'charset' => 'utf8mb4'
@@ -61,9 +63,24 @@ class AppConfig {
 
             /*
             |--------------------------------------------------------------------------
+            | Configuration Mail (SMTP)
+            |--------------------------------------------------------------------------
+            */
+            'mail' => [
+                'from_email' => 'noreply@madeline.local',
+                'from_name' => 'Madeline',
+                'host' => 'sandbox.smtp.mailtrap.io',
+                'port' => '2525',
+                'user' => '9cd2e4844e1210',
+                'pass' => '1050693059b1c1',
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
             | Middlewares Globaux
             |--------------------------------------------------------------------------
             | Ces middlewares seront exécutés à CHAQUE requête.
+            |--------------------------------------------------------------------------
             */
             'middlewares' => [
                 \App\Middlewares\SecurityHeadersMiddleware::class,

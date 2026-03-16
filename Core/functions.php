@@ -50,3 +50,18 @@ if (!function_exists('url')) {
         return rtrim($baseUrl, '/') . '/' . ltrim($path, '/');
     }
 }
+
+if (!function_exists('request')) {
+    /**
+     * Retourne l'instance unique de la requête HTTP
+     * 
+     * @return \Packages\Http\Request
+     */
+    function request() {
+        static $instance = null;
+        if ($instance === null) {
+            $instance = new \Packages\Http\Request();
+        }
+        return $instance;
+    }
+}

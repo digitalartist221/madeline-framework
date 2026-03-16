@@ -82,6 +82,47 @@
             padding: 1.5rem;
             border: 1px solid var(--doc-border);
         }
+
+        /* Custom Mini-Scrollbar for Sidebar */
+        .sidebar-scroll {
+            max-height: calc(100vh - 350px);
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .sidebar-scroll::-webkit-scrollbar { width: 3px; }
+        .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.1); border-radius: 10px; }
+        .sidebar-scroll::-webkit-scrollbar-thumb:hover { background: rgba(139, 92, 246, 0.3); }
+
+        /* Copy Button Styles */
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            z-index: 10;
+        }
+        .copy-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+            color: #fff;
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: scale(1.05);
+        }
+        .copy-btn.copied {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
     </style>
     @biir('extra_head')
 @jeexdef
@@ -94,7 +135,7 @@
             <div class="sticky top-32 space-y-12">
                 <div class="animate-fade-in">
                     <h4 class="sidebar-title">Architecture & Guide</h4>
-                    <div class="space-y-1">
+                    <div class="space-y-1 sidebar-scroll">
                         @biir('toc')
                     </div>
                 </div>
@@ -128,4 +169,52 @@
         </main>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ajout des boutons de copie sur les blocs de code
+            document.querySelectorAll('pre').forEach(block => {
+                // Ensure the block is relative for absolute positioning of the button
+                if (getComputedStyle(block).position === 'static') {
+                    block.style.position = 'relative';
+                }
+
+                const button = document.createElement('button');
+                button.className = 'copy-btn';
+                button.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                `;
+
+                button.addEventListener('click', async () => {
+                    const code = block.querySelector('code');
+                    const text = code ? code.innerText : block.innerText;
+
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        button.classList.add('copied');
+                        button.innerHTML = `
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        `;
+
+                        setTimeout(() => {
+                            button.classList.remove('copied');
+                            button.innerHTML = `
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            `;
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Erreur lors de la copie :', err);
+                    }
+                });
+
+                block.appendChild(button);
+            });
+        });
+    </script>
 @jeexdef

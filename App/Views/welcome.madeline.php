@@ -33,14 +33,9 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a href="{{ url('register') }}" class="group relative w-full sm:w-auto px-12 py-5 bg-gray-900 dark:bg-white text-white dark:text-black font-black rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(255,255,255,0.1)] flex items-center justify-center gap-3">
+                <a href="{{ url('docs') }}" class="group relative w-full sm:w-auto px-12 py-5 bg-gray-900 dark:bg-white text-white dark:text-black font-black rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(255,255,255,0.1)] flex items-center justify-center gap-3">
                     Bâtir avec Madeline
                     <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                </a>
-                
-                <a href="{{ url('docs') }}" class="w-full sm:w-auto px-12 py-5 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white font-bold rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-all backdrop-blur-xl flex items-center justify-center gap-3 group">
-                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
-                    Explorer le Guide
                 </a>
             </div>
 

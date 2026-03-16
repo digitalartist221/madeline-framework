@@ -11,10 +11,11 @@
     <a class="sidebar-link" href="#orm">MadelineORM (Synchro SQL)</a>
     <a class="sidebar-link" href="#views">Moteur MadelineView</a>
     <a class="sidebar-link" href="#assets">Gestion des Assets</a>
+    <a class="sidebar-link" href="#request">Requêtes & Formulaires</a>
     <a class="sidebar-link" href="#components">Architecture Composants</a>
     <a class="sidebar-link" href="#mail">Mails & Templates</a>
     <a class="sidebar-link" href="#storage">Storage & Uploads</a>
-    <a class="sidebar-link" href="#config">Configuration & Setup</a>
+    <a class="sidebar-link" href="#config">Configuration (AppConfig)</a>
     <a class="sidebar-link" href="#swagger">Console API Interactive</a>
     <a class="sidebar-link" href="#performance">Cache & Performance</a>
 @jeexdef
@@ -22,7 +23,7 @@
 @def('doc_content')
 
     <!-- HERO SECTION -->
-    <div class="mb-32">
+    <div id="intro" class="mb-32">
         <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[10px] font-black uppercase tracking-[0.3em] mb-12">
             Spécifications Industrielles · v1.0.0 Stable
         </div>
@@ -115,6 +116,29 @@ $dbHost = Config::get('database.host', 'localhost');</code></pre>
             </ul>
         </section>
 
+        <!-- ROUTER -->
+        <section id="router" class="mb-32">
+            <h2>Routage & Middleware</h2>
+            <p>Le routeur synchrone de Madeline gère la résolution des URIs et l'exécution de la pile de middlewares.</p>
+            
+            <h3>Définition de Routes</h3>
+            <p>Les routes sont définies dans le fichier <code>routes.php</code> à la racine du projet.</p>
+<pre><code>use Core\Router;
+
+Router::get('/hello', function() {
+    return "Bonjour le monde";
+});
+
+// Avec contrôleur et middleware
+Router::get('/profile', ['App\Controllers\UserController', 'profile'], ['App\Middlewares\AuthMiddleware']);</code></pre>
+
+            <h3>Paramètres de Route</h3>
+            <p>Capturez des segments dynamiques facilement :</p>
+<pre><code>Router::get('/user/{id}', function($id) {
+    return "ID Utilisateur : " . $id;
+});</code></pre>
+        </section>
+
         <!-- 4. ORM -->
         <section id="orm" class="mb-32">
             <h2>MadelineORM</h2>
@@ -178,6 +202,44 @@ $dbHost = Config::get('database.host', 'localhost');</code></pre>
             <h4>Stylesheet Global</h4>
             <p>Le framework inclut un fichier <code>public/css/madeline.css</code> pour vos styles globaux et variables CSS personnalisées.</p>
 
+            <h3 id="request" class="mt-20">Requêtes & Formulaires</h3>
+            <p>Le traitement des données entrantes est simplifié par la classe <code>Request</code>, accessible via le helper global <code>request()</code>.</p>
+            
+            <h4>Sémantique Wolof (jël & seet)</h4>
+            <p>Madeline privilégie une syntaxe expressive pour récupérer et valider vos données.</p>
+<pre><code>// Dans votre contrôleur
+$nom = request()->jël('nom'); // Récupère $_POST['nom'] ou $_GET['nom']
+
+if (request()->seet(['nom' => 'required', 'email' => 'required|email'])) {
+    // Validation réussie
+}</code></pre>
+
+            <h4>Support Hybride (JSON & Fichiers)</h4>
+            <p>Madeline détecte automatiquement le format de la requête (Formulaire classique ou JSON) et unifie l'accès aux données.</p>
+            <ul>
+                <li><strong>JSON</strong> : Si le client envoie du JSON, <code>request()->input()</code> récupère les clés directement.</li>
+                <li><strong>Fichiers</strong> : Utilisez <code>request()->file('avatar')</code> pour accéder aux données d'upload.</li>
+            </ul>
+
+            <h4>Métadonnées & Sécurité</h4>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <tr class="border-b border-gray-100 dark:border-white/10 uppercase tracking-widest text-[10px]">
+                            <th class="py-4">Méthode</th>
+                            <th class="py-4">Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 dark:divide-white/5">
+                        <tr><td class="py-4"><code>method()</code></td><td class="py-4">Retourne le verbe HTTP (GET, POST, etc.).</td></tr>
+                        <tr><td class="py-4"><code>isPost() / isGet()</code></td><td class="py-4">Vérifie le type de requête.</td></tr>
+                        <tr><td class="py-4"><code>ip()</code></td><td class="py-4">Retourne l'adresse IP du client.</td></tr>
+                        <tr><td class="py-4"><code>header('Key')</code></td><td class="py-4">Récupère un en-tête HTTP spécifique.</td></tr>
+                        <tr><td class="py-4"><code>all()</code></td><td class="py-4">Retourne l'ensemble des paramètres fusionnés.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
             <h3 id="components" class="mt-20">Architecture Composants</h3>
             <p>Déclarez des composants réutilisables avec une syntaxe proche du HTML moderne.</p>
 <pre><code>&lt;!-- Usage --&gt;
@@ -199,25 +261,26 @@ Madeline cherche dans App/Views/Components/alert.madeline.php</code></pre>
         <!-- 7. CONFIGURATION -->
         <section id="config" class="mb-32">
             <div class="text-[10px] font-black text-brand-500 uppercase tracking-[0.4em] mb-6">Chapitre VII</div>
-            <h2>Configuration &amp; Setup</h2>
-            <p>Madeline propose un assistant d'installation (Assistant Rek) mais peut également être configuré manuellement.</p>
+            <h2>Configuration (AppConfig)</h2>
+            <p>Madeline utilise une source de vérité unique située dans <code>App/Config/AppConfig.php</code>. Ce système orienté objet facilite la gestion des environnements et l'accès aux variables.</p>
             
-            <h3>Assistant Rek</h3>
-            <p>Accessible via <code>/setup</code>, il permet de configurer le nom de l'application, sa description et les accès à la base de données. <strong>Cette étape est facultative</strong> : vous pouvez ignorer la configuration DB pour une utilisation purement statique.</p>
-
-            <h3>Configuration Avancée</h3>
-            <p>Vous pouvez ajouter vos propres clés (API, Services tiers) directement dans <code>config/app.php</code> ou via une classe <code>App\Config\AppConfig</code>.</p>
-<pre><code>// Dans config/app.php
+            <h3>La Classe AppConfig</h3>
+            <p>Toutes vos clés (Base de données, Mail, API) sont centralisées ici. Vous n'avez plus besoin de jongler avec plusieurs fichiers de configuration.</p>
+<pre><code>// App/Config/AppConfig.php
 return [
-    'app' => [ ... ],
-    'api' => [
-        'key' => 'votre_cle_secrete',
-        'stripe_id' => 'sk_test_...'
+    'name' => 'Madeline',
+    'mail' => [
+        'host' => 'smtp.example.com',
+        // ...
     ]
 ];
 
-// Utilisation dans votre code
-\$token = \Core\Config::get('api.key');</code></pre>
+// Utilisation
+\$name = \Core\Config::get('name');
+\$smtp = \Core\Config::get('mail.host');</code></pre>
+
+            <h3>Assistant d'Installation</h3>
+            <p>Lors d'un premier déploiement, vous pouvez accéder à <code>/setup</code> pour configurer les accès essentiels via une interface graphique interactive.</p>
         </section>
 
         <!-- 8. MAILS -->
@@ -260,6 +323,30 @@ $path = Storage::upload($_FILES['avatar'], 'profiles');
 
 // Récupération URL
 $url = Storage::url($path);</code></pre>
+        </section>
+
+        <!-- 10. API & SWAGGER -->
+        <section id="swagger" class="mb-32">
+            <div class="text-[10px] font-black text-brand-500 uppercase tracking-[0.4em] mb-6">Chapitre X</div>
+            <h2>Console API Interactive</h2>
+            <p>Madeline intègre nativement Swagger UI pour documenter et tester vos APIs en temps réel.</p>
+            <ul>
+                <li><strong>URL</strong> : Accédez à <code>/api/docs/ui</code> pour l'interface graphique.</li>
+                <li><strong>JSON</strong> : Le schéma OpenAPI est disponible sur <code>/api/docs</code>.</li>
+            </ul>
+            <p>Cette documentation est auto-générée à partir de vos contrôleurs et de la configuration API.</p>
+        </section>
+
+        <!-- 11. PERFORMANCE -->
+        <section id="performance" class="mb-32">
+            <div class="text-[10px] font-black text-brand-500 uppercase tracking-[0.4em] mb-6">Chapitre XI</div>
+            <h2>Cache & Performance</h2>
+            <p>Le framework est optimisé pour une exécution ultra-rapide (< 1ms pour le routage).</p>
+            <ul>
+                <li><strong>View Cache</strong> : Les vues compilées sont stockées dans <code>storage/cache/views</code>.</li>
+                <li><strong>Turbo SPA</strong> : Grâce à <code>madeline.js</code>, les navigations ne rechargent que le contenu utile via AJAX/Fetch.</li>
+                <li><strong>Auto-Invalidation</strong> : Le cache des vues se régénère automatiquement si le fichier source est modifié.</li>
+            </ul>
         </section>
 
     </article>

@@ -9,6 +9,9 @@ class App {
         // Charger la configuration globale du framework
         Config::load();
 
+        // Nettoyage automatique du cache (Périodique)
+        Cache::autoClear();
+
         // Support du mode .htaccess
         if (isset($_GET['url']) && !empty($_GET['url'])) {
             $url = '/' . ltrim($_GET['url'], '/');

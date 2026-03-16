@@ -166,100 +166,10 @@
 
 @miingi fi
     <!-- =============================== -->
-    <!-- SIDEBAR — Authenticated Layout  -->
+    <!-- MAIN Layout — Centered content  -->
     <!-- =============================== -->
-    <aside class="fixed top-0 left-0 h-full w-64 bg-[#050510] text-white z-50 flex flex-col shadow-2xl overflow-y-auto">
-        <!-- Logo -->
-        <div class="px-8 py-10 flex items-center gap-3 border-b border-white/5">
-            <div class="w-9 h-9 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/30 flex-shrink-0">
-                <div class="w-2.5 h-2.5 bg-white rounded-full"></div>
-            </div>
-            <div>
-                <span class="text-lg font-black tracking-tighter">Business<span class="text-brand-500">.</span></span>
-                <p class="text-[7px] font-black text-gray-600 uppercase tracking-[0.3em]">Madeline Suite</p>
-            </div>
-        </div>
-
-        <nav class="flex-1 px-4 py-6 space-y-8 overflow-y-auto">
-            <div class="space-y-1">
-                <p class="sidebar-section-label">Gestion Financière</p>
-                <a href="/dashboard" class="nav-link {{ $_SERVER['REQUEST_URI'] === '/dashboard' ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                    <span>Cockpit</span>
-                </a>
-                <a href="/documents" class="nav-link {{ str_contains($_SERVER['REQUEST_URI'], '/documents') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    <span>Factures</span>
-                </a>
-                <a href="/depenses" class="nav-link {{ str_contains($_SERVER['REQUEST_URI'], '/depenses') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <span>Dépenses</span>
-                </a>
-                <a href="/contrats" class="nav-link {{ str_contains($_SERVER['REQUEST_URI'], '/contrats') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
-                    <span>Juridique</span>
-                </a>
-            </div>
-
-            <div class="space-y-1">
-                <p class="sidebar-section-label">Relations & CRM</p>
-                <a href="/clients" class="nav-link {{ str_contains($_SERVER['REQUEST_URI'], '/clients') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                    <span>Clients CRM</span>
-                </a>
-                <a href="/entreprises" class="nav-link {{ str_contains($_SERVER['REQUEST_URI'], '/entreprises') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    <span>Entités</span>
-                </a>
-                <a href="/produits" class="nav-link {{ str_contains($_SERVER['REQUEST_URI'], '/produits') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14L4 7m8 4v10M4 7v10l8 4"/></svg>
-                    <span>Catalogue</span>
-                </a>
-            </div>
-
-            <?php if (($_SESSION['user_role'] ?? '') === 'admin'): ?>
-            <div class="space-y-1">
-                <p class="sidebar-section-label" style="color:#6d28d9;">Administration</p>
-                <a href="/equipe" class="nav-link {{ str_contains($_SERVER['REQUEST_URI'], '/equipe') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    <span>Équipe</span>
-                    <span class="badge">ADMIN</span>
-                </a>
-            </div>
-            <?php endif; ?>
-        </nav>
-
-        <div class="p-5 border-t border-white/5 space-y-3">
-            <!-- Theme Switcher for Sidebar -->
-            <div class="flex items-center justify-between px-3 py-2 bg-white/5 rounded-2xl mb-2">
-                <span class="text-[9px] font-bold uppercase tracking-widest text-gray-500">Mode</span>
-                <button onclick="Madeline.toggleTheme()" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 transition-all text-gray-400">
-                    <svg class="dark:hidden w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    <svg class="hidden dark:block w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 16.243l.707.707M7.05 7.05l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg>
-                </button>
-            </div>
-
-            <a href="/profile" class="flex items-center gap-3 px-3 py-3 hover:bg-white/5 rounded-2xl transition-all group">
-                <div class="w-9 h-9 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center font-black text-sm uppercase flex-shrink-0">
-                    {{ strtoupper(substr($_SESSION['user_name'] ?? 'U', 0, 1)) }}
-                </div>
-                <div class="flex-1 min-w-0">
-                    <p class="text-[11px] font-black text-white truncate">{{ $_SESSION['user_name'] ?? 'Utilisateur' }}</p>
-                    <p class="text-[8px] font-black text-gray-600 uppercase tracking-widest">
-                        {{ strtoupper($_SESSION['user_role'] ?? 'member') }} · Voir profil
-                    </p>
-                </div>
-                <svg class="w-4 h-4 text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </a>
-            <a href="/logout" data-no-madeline="true" class="flex items-center gap-3 px-3 py-3 hover:bg-red-500/10 rounded-2xl transition-all group">
-                <svg class="w-4 h-4 text-gray-600 group-hover:text-red-400 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3 3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                <span class="text-[10px] font-black text-gray-500 group-hover:text-red-400 uppercase tracking-widest transition-colors">Déconnexion</span>
-            </a>
-        </div>
-    </aside>
-
-    <main id="madeline-app" class="pl-64 min-h-screen relative z-10">
-        <div class="px-12 py-16 max-w-[1600px] mx-auto">
+    <main id="madeline-app" class="min-h-screen relative z-10">
+        <div class="px-12 py-16 max-w-[1200px] mx-auto">
             @biir('content')
         </div>
     </main>
@@ -325,7 +235,7 @@
                 <div class="space-y-6">
                     <h4 class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 dark:text-white/20">Origines</h4>
                     <div class="text-[11px] font-bold text-gray-400 dark:text-white/20 leading-relaxed font-sans">
-                        Conçu avec passion à Dakar <br> pour l'excellence globale.
+                        Conçu avec amour au Sénégal.
                     </div>
                 </div>
             </div>

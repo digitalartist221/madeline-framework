@@ -59,14 +59,8 @@ class AuthController {
     public function logout() {
         if (session_status() === PHP_SESSION_NONE) session_start();
         
-        // Vider le cache des vues
-        $cacheDir = __DIR__ . '/../../storage/cache/views';
-        if (is_dir($cacheDir)) {
-            $files = glob($cacheDir . '/*');
-            foreach ($files as $file) {
-                if (is_file($file)) unlink($file);
-            }
-        }
+        // Vider le cache des vues (Centralisé)
+        \Core\Cache::clear();
 
         $_SESSION = [];
         if (ini_get('session.use_cookies')) {
@@ -107,38 +101,4 @@ class AuthController {
         return MadelineView::render('auth/forgot_password', ['success' => 'Si cet email existe, un lien de réinitialisation a été envoyé.']);
     }
 
-    public function teamList() {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        $members = User::fari(['parent_id' => $_SESSION['user_id']]);
-        return MadelineView::render('auth/team', ['members' => $members]);
-    }
-
-    public function teamAdd() {
-        return MadelineView::render('auth/team_edit', ['member' => null]);
-    }
-
-    public function teamSave() {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        
-        $data = [
-            'name' => $_POST['name'] ?? '',
-            'email' => $_POST['email'] ?? '',
-            'role' => 'member',
-            'parent_id' => $_SESSION['user_id']
-        ];
-        
-        if (!empty($_POST['password'])) {
-            $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        }
-
-        $id = $_POST['id'] ?? null;
-        if ($id) {
-            User::weccit($data, ['id' => $id]);
-        } else {
-            User::bindu($data);
-        }
-        
-        header('Location: /equipe');
-        exit;
-    }
 }
