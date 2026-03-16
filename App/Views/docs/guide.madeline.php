@@ -16,6 +16,7 @@
     <a class="sidebar-link" href="#mail">Mails & Templates</a>
     <a class="sidebar-link" href="#storage">Storage & Uploads</a>
     <a class="sidebar-link" href="#config">Configuration (AppConfig)</a>
+    <a class="sidebar-link" href="#vscode">Extension VSCode (Snippets)</a>
     <a class="sidebar-link" href="#swagger">Console API Interactive</a>
     <a class="sidebar-link" href="#performance">Cache & Performance</a>
 @jeexdef
@@ -281,6 +282,30 @@ return [
 
             <h3>Assistant d'Installation</h3>
             <p>Lors d'un premier déploiement, vous pouvez accéder à <code>/setup</code> pour configurer les accès essentiels via une interface graphique interactive.</p>
+        </section>
+
+        <!-- VSCODE EXTENSION -->
+        <section id="vscode" class="mb-32">
+            <div class="text-[10px] font-black text-brand-500 uppercase tracking-[0.4em] mb-6">Productivité</div>
+            <h2>Extension VSCode (Snippets)</h2>
+            <p>Pour booster votre productivité, nous proposons un pack de snippets officiels qui ajoutent l'autocomplétion pour les directives Madeline et les méthodes de l'ORM.</p>
+            
+            <div class="p-8 rounded-3xl bg-brand-500/5 border border-brand-500/10 mb-12">
+                <h4 class="text-brand-500 font-black uppercase tracking-widest text-xs mb-4">Installation Manuelle (v1.0)</h4>
+                <ol class="text-sm space-y-4 list-decimal pl-5">
+                    <li>Téléchargez le fichier <a href="{{ asset('extensions/madeline.code-snippets') }}" class="text-brand-500 underline font-bold" download>madeline.code-snippets</a>.</li>
+                    <li>Dans VSCode, allez dans <code>File > Preferences > Configure User Snippets</code>.</li>
+                    <li>Sélectionnez <code>New Global Snippets file...</code> et nommez-le <code>madeline</code>.</li>
+                    <li>Copiez le contenu du fichier téléchargé dans le fichier qui s'ouvre dans VSCode.</li>
+                </ol>
+            </div>
+
+            <h3>Exemples d'utilisation</h3>
+            <ul>
+                <li>Tapez <code>baat</code> + Tab pour générer une boucle Wolof.</li>
+                <li>Tapez <code>ndax</code> + Tab pour une condition.</li>
+                <li>Tapez <code>bindu</code> sur un objet ORM pour l'enregistrer.</li>
+            </ul>
         </section>
 
         <!-- 8. MAILS -->

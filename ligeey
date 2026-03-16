@@ -144,7 +144,8 @@ switch ($command) {
             __DIR__ . '/App/Views',
             __DIR__ . '/App/Migrations',
             __DIR__ . '/storage/cache/views',
-            __DIR__ . '/storage/app/public'
+            __DIR__ . '/storage/app/public',
+            __DIR__ . '/public/extensions'
         ];
 
         $keepFiles = [
@@ -153,7 +154,8 @@ switch ($command) {
             'User.php', 
             'auth', 'docs', 'mail', 'errors', 'Components',
             'layout.madeline.php', 'dashboard.madeline.php', 'welcome.madeline.php',
-            'api.madeline.php', 'guide.madeline.php', 'AppConfig.php' // Protecting doc views and config
+            'api.madeline.php', 'guide.madeline.php', 'AppConfig.php',
+            'madeline.code-snippets' // Protecting snippets
         ];
 
         foreach ($dirsToClean as $dir) {

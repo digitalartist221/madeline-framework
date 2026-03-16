@@ -1,0 +1,84 @@
+{
+	"Madeline Directives": {
+		"prefix": "baat",
+		"body": [
+			"@baat(\\$${1:items} as \\$${2:item})",
+			"\t$0",
+			"@jeexbaat"
+		],
+		"description": "Boucle Foreach Madeline (Wolof)"
+	},
+	"Madeline If": {
+		"prefix": "ndax",
+		"body": [
+			"@ndax(${1:condition})",
+			"\t$0",
+			"@jeexndax"
+		],
+		"description": "Structure Conditionnelle Madeline (Wolof)"
+	},
+	"Madeline Block Definition": {
+		"prefix": "def",
+		"body": [
+			"@def('${1:blockName}')",
+			"\t$0",
+			"@jeexdef"
+		],
+		"description": "Définition de bloc Madeline"
+	},
+	"Madeline Layout Heritage": {
+		"prefix": "indi",
+		"body": "@indi('${1:layout}')",
+		"description": "Héritage de Layout Madeline"
+	},
+	"Madeline Section Injection": {
+		"prefix": "biir",
+		"body": "@biir('${1:section}')",
+		"description": "Injection de Section Madeline"
+	},
+	"Madeline CSRF Token": {
+		"prefix": "csrf",
+		"body": "@csrf",
+		"description": "Token CSRF Madeline"
+	},
+	"Madeline JSON": {
+		"prefix": "json",
+		"body": "@json(\\$${1:variable})",
+		"description": "Encodage JSON Madeline"
+	},
+	"Madeline ORM Bindu": {
+		"prefix": "bindu",
+		"body": "->bindu()",
+		"description": "Persistance ORM Madeline (Save/Insert)"
+	},
+	"Madeline ORM Fari": {
+		"prefix": "fari",
+		"body": "->fari([${1:'statut' => 1}])",
+		"description": "Filtre ORM Madeline (Select Multi)"
+	},
+	"Madeline ORM Loko": {
+		"prefix": "loko",
+		"body": "->loko(\\$${1:id})",
+		"description": "Extraction ORM Madeline (Select One)"
+	},
+	"Madeline ORM Far": {
+		"prefix": "far",
+		"body": "->far()",
+		"description": "Suppression ORM Madeline"
+	},
+	"Madeline ORM Weccit": {
+		"prefix": "weccit",
+		"body": "->weccit()",
+		"description": "Mise à jour ORM Madeline (Update)"
+	},
+	"Madeline Asset Helper": {
+		"prefix": "asset",
+		"body": "asset('${1:path}')",
+		"description": "Génération URL Asset Madeline"
+	},
+	"Madeline URL Helper": {
+		"prefix": "url",
+		"body": "url('${1:path}')",
+		"description": "Génération URL Madeline"
+	}
+}
