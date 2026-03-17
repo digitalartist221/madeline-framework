@@ -12,11 +12,17 @@ if (!function_exists('asset')) {
      * @return string
      */
     function asset($path) {
+        $basePath = \Core\Config::get('app.base_path', '');
         $baseUrl = \Core\Config::get('url', '');
+        
         if (empty($baseUrl)) {
             $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
             $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-            $baseUrl = $protocol . '://' . $host;
+            $baseUrl = $protocol . '://' . $host . $basePath;
+        } else {
+            if (!empty($basePath) && !str_contains($baseUrl, $basePath)) {
+                $baseUrl = rtrim($baseUrl, '/') . $basePath;
+            }
         }
         
         $path = ltrim($path, '/');
@@ -40,11 +46,17 @@ if (!function_exists('url')) {
      * @return string
      */
     function url($path = '') {
+        $basePath = \Core\Config::get('app.base_path', '');
         $baseUrl = \Core\Config::get('url', '');
+        
         if (empty($baseUrl)) {
             $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
             $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-            $baseUrl = $protocol . '://' . $host;
+            $baseUrl = $protocol . '://' . $host . $basePath;
+        } else {
+            if (!empty($basePath) && !str_contains($baseUrl, $basePath)) {
+                $baseUrl = rtrim($baseUrl, '/') . $basePath;
+            }
         }
         
         return rtrim($baseUrl, '/') . '/' . ltrim($path, '/');

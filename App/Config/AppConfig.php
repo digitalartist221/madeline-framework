@@ -35,7 +35,8 @@ class AppConfig
      | URL de base
      |--------------------------------------------------------------------------
      */
-            'url' => 'http://localhost:8000',
+            'url' => '', // Laissez vide pour auto-détection (Subdomain/Subfolder friendly)
+            'base_path' => '', // Auto-rempli par le noyau
 
             /*
      |--------------------------------------------------------------------------

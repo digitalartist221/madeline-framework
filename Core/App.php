@@ -3,16 +3,28 @@ namespace Core;
 
 class App {
     public function run() {
-        // Obtenir l'URL (compatible Apache et PHP built-in server)
-        $url = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-        
         // Charger la configuration globale du framework
         Config::load();
+
+        // DETECTION DU CHEMIN DE BASE (Zero-Config Subdirectory support)
+        // Detecte si on est dans un sous-dossier (ex: /app/madeline/public/index.php)
+        $scriptName = $_SERVER['SCRIPT_NAME'];
+        $baseDir = str_replace('/public/index.php', '', $scriptName);
+        Config::set('app.base_path', $baseDir);
+
+        // Obtenir l'URL (compatible Apache et PHP built-in server)
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $url = parse_url($requestUri, PHP_URL_PATH);
+        
+        // Retirer le base_path de l'URL pour le routage interne
+        if (!empty($baseDir) && $baseDir !== '/' && strpos($url, $baseDir) === 0) {
+            $url = substr($url, strlen($baseDir));
+        }
 
         // Nettoyage automatique du cache (Périodique)
         Cache::autoClear();
 
-        // Support du mode .htaccess
+        // Support du mode .htaccess (url=...)
         if (isset($_GET['url']) && !empty($_GET['url'])) {
             $url = '/' . ltrim($_GET['url'], '/');
         }

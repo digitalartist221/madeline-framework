@@ -1467,8 +1467,8 @@ EOD;
     RewriteEngine On
     
     # Rediriger tout vers le dossier public/ s'il n'y est pas déjà
-    RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ public/$1 [L]
+    RewriteCond %{REQUEST_URI} !/public/
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
 </IfModule>
 EOD;
 
@@ -1494,9 +1494,10 @@ class AppConfig {
         return [
             'name' => 'Madeline',
             'description' => 'Madeline Framework - Wolofized Edition',
+            'url' => '', // Laissez vide pour auto-détection
+            'base_path' => '', // Auto-rempli par le noyau
             'env' => 'local',
             'debug' => true,
-            'url' => 'http://localhost:8000',
             'view_cache_lifetime' => 0,
             'database' => [
                 'host' => 'localhost',

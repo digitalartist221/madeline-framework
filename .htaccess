@@ -2,6 +2,6 @@
     RewriteEngine On
     
     # Rediriger tout vers le dossier public/ s'il n'y est pas déjà
-    RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ public/$1 [L]
+    RewriteCond %{REQUEST_URI} !/public/
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
 </IfModule>
