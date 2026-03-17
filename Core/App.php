@@ -20,26 +20,27 @@ class App {
 
         // Obtenir l'URL (compatible Apache, LWS, et PHP built-in server)
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-        $url = parse_url($requestUri, PHP_URL_PATH);
+        $urlPath = parse_url($requestUri, PHP_URL_PATH);
         
         // Priorité absolue : le paramètre 'url' passé par .htaccess (mode redirection)
+        // Cela règle 100% des problèmes si le .htaccess est présent
         if (isset($_GET['url']) && !empty($_GET['url'])) {
             $url = '/' . ltrim($_GET['url'], '/');
         } else {
-            // Sinon, on nettoie le base_path de l'URL pour le routage interne
+            // Sinon (mode serveur intégré PHP ou redirection transparente), 
+            // on nettoie le base_path de l'URL pour le routage interne
+            $url = $urlPath;
             if (!empty($baseDir) && $baseDir !== '/' && strpos($url, $baseDir) === 0) {
                 $url = substr($url, strlen($baseDir));
             }
         }
 
-        $url = rtrim($url, '/');
-        if (empty($url)) {
-            $url = '/';
-        }
-
-        $url = rtrim($url, '/');
-        if (empty($url)) {
-            $url = '/';
+        // Nettoyage final : on vire les slashs en trop et le trailing slash
+        $url = '/' . trim($url, '/');
+        
+        // Cache auto-cleaning (Périodique)
+        if (class_exists('\\Core\\Cache')) {
+            \Core\Cache::autoClear();
         }
 
         // Configuration de base ou DB

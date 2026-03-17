@@ -1463,7 +1463,8 @@ EOD;
 EOD;
 
         $rootHtaccessTemplate = <<<'EOD'
-# Madeline Root - Portabilité Absolue
+# Madeline Framework - Root Redirector
+# v1.2.6 - Bulletproof Redirection
 DirectoryIndex index.php
 Options -MultiViews -Indexes
 
@@ -1473,23 +1474,32 @@ Options -MultiViews -Indexes
     # Empêcher l'héritage de base du parent si on est dans un sous-dossier
     RewriteBase /
     
-    # Rediriger tout vers le dossier public/ s'il n'y est pas déjà
-    RewriteCond %{REQUEST_URI} !/public/
+    # Si le fichier existe dans public, on le sert directement
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
     RewriteRule ^(.*)$ public/$1 [L,QSA]
+    
+    # Rediriger tout vers le dossier public/ s'il n'y est pas déjà
+    # On passe explicitement le chemin via ?url= pour aider le noyau sur certains serveurs
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/index.php?url=$1 [L,QSA]
 </IfModule>
 EOD;
 
         $publicHtaccessTemplate = <<<'EOD'
-# Madeline Public - Isolation Totale
+# Madeline Public - Core Router
+# v1.2.6 - Deep Path Resilience
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
+    # RewriteBase peut aider sur certains serveurs s'il y a des erreurs 500
+    # RewriteBase /public/
+
     # Ne rien faire si c'est un fichier ou dossier réel
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     
     # Envoyer tout vers index.php (url=...)
-    # On évite RewriteBase pour rester porteur n'importe où
+    # On capture tout le chemin pour ne rien perdre lors des redirections LWS
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 EOD;

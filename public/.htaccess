@@ -1,12 +1,16 @@
-# Madeline Public - Isolation Totale
+# Madeline Public - Core Router
+# v1.2.6 - Deep Path Resilience
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
+    # RewriteBase peut aider sur certains serveurs s'il y a des erreurs 500
+    # RewriteBase /public/
+
     # Ne rien faire si c'est un fichier ou dossier réel
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     
     # Envoyer tout vers index.php (url=...)
-    # On évite RewriteBase pour rester porteur n'importe où
+    # On capture tout le chemin pour ne rien perdre lors des redirections LWS
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
