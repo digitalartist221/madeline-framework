@@ -1,3 +1,4 @@
+<?php
 /**
  * Madeline Framework - Point d'entrée principal
  */

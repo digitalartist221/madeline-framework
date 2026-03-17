@@ -7,10 +7,16 @@ class App {
         Config::load();
 
         // DETECTION DU CHEMIN DE BASE (Zero-Config Subdirectory support)
-        // Detecte si on est dans un sous-dossier (ex: /app/madeline/public/index.php)
         $scriptName = $_SERVER['SCRIPT_NAME'];
-        $baseDir = str_replace('/public/index.php', '', $scriptName);
-        Config::set('app.base_path', $baseDir);
+        // Si le script est public/index.php, le baseDir est ce qui précède /public
+        if (str_contains($scriptName, '/public/index.php')) {
+            $baseDir = str_replace('/public/index.php', '', $scriptName);
+        } else {
+            // Si on pointe directement sur public/, le scriptName est /index.php 
+            // et le baseDir est vide (on est à la racine)
+            $baseDir = str_replace('/index.php', '', $scriptName);
+        }
+        Config::set('app.base_path', rtrim($baseDir, '/'));
 
         // Obtenir l'URL (compatible Apache et PHP built-in server)
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
