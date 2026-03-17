@@ -1,3 +1,4 @@
+# Madeline Public - Isolation Totale
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
@@ -5,6 +6,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     
-    # Envoyer tout vers index.php
+    # Envoyer tout vers index.php (url=...)
+    # On évite RewriteBase pour rester porteur n'importe où
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>

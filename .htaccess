@@ -1,5 +1,12 @@
+# Madeline Root - Portabilité Absolue
+DirectoryIndex index.php
+Options -MultiViews -Indexes
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    
+    # Empêcher l'héritage de base du parent si on est dans un sous-dossier
+    RewriteBase /
     
     # Rediriger tout vers le dossier public/ s'il n'y est pas déjà
     RewriteCond %{REQUEST_URI} !/public/

@@ -18,21 +18,23 @@ class App {
         }
         Config::set('app.base_path', rtrim($baseDir, '/'));
 
-        // Obtenir l'URL (compatible Apache et PHP built-in server)
+        // Obtenir l'URL (compatible Apache, LWS, et PHP built-in server)
         $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
         $url = parse_url($requestUri, PHP_URL_PATH);
         
-        // Retirer le base_path de l'URL pour le routage interne
-        if (!empty($baseDir) && $baseDir !== '/' && strpos($url, $baseDir) === 0) {
-            $url = substr($url, strlen($baseDir));
-        }
-
-        // Nettoyage automatique du cache (Périodique)
-        Cache::autoClear();
-
-        // Support du mode .htaccess (url=...)
+        // Priorité absolue : le paramètre 'url' passé par .htaccess (mode redirection)
         if (isset($_GET['url']) && !empty($_GET['url'])) {
             $url = '/' . ltrim($_GET['url'], '/');
+        } else {
+            // Sinon, on nettoie le base_path de l'URL pour le routage interne
+            if (!empty($baseDir) && $baseDir !== '/' && strpos($url, $baseDir) === 0) {
+                $url = substr($url, strlen($baseDir));
+            }
+        }
+
+        $url = rtrim($url, '/');
+        if (empty($url)) {
+            $url = '/';
         }
 
         $url = rtrim($url, '/');

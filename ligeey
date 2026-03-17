@@ -1463,8 +1463,15 @@ EOD;
 EOD;
 
         $rootHtaccessTemplate = <<<'EOD'
+# Madeline Root - Portabilité Absolue
+DirectoryIndex index.php
+Options -MultiViews -Indexes
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    
+    # Empêcher l'héritage de base du parent si on est dans un sous-dossier
+    RewriteBase /
     
     # Rediriger tout vers le dossier public/ s'il n'y est pas déjà
     RewriteCond %{REQUEST_URI} !/public/
@@ -1473,6 +1480,7 @@ EOD;
 EOD;
 
         $publicHtaccessTemplate = <<<'EOD'
+# Madeline Public - Isolation Totale
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
@@ -1480,7 +1488,8 @@ EOD;
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     
-    # Envoyer tout vers index.php
+    # Envoyer tout vers index.php (url=...)
+    # On évite RewriteBase pour rester porteur n'importe où
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 EOD;
